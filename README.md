@@ -1,8 +1,14 @@
 # webrtc-nativeimpl-tutorial
 
-This is a short tutorial on running WebRTC native client implementation in Linux without a browser.
+**UNDER CONSTRUCTION**
 
-Packages for this tutorial have been compiled on a Linux Development Machine (xUbuntu 14.0, 64 bit architecture) and tested on a linux box mini pc (Asus EEEPC running Ubuntu server 14.04, 32-bit version).
+This is a short collection of notes collected on attempts to run WebRTC native client implementation in Linux without a browser (This has not been successful so far).
+
+# openwebrtc
+
+These are some tests related to [OpenWebRTC](http://www.openwebrtc.org/).
+
+Packages for this tutorial have been compiled on a Linux Development Machine (xUbuntu 14.0, 64 bit architecture) and on a Linux-based mini pc box (Asus EEEPC running Ubuntu server 14.04, 32-bit version).
 
 ## Step 1 - Building cerbero and openwebrtc binaries
 
@@ -24,6 +30,7 @@ sudo chown -R $UID /opt/openwebrtc-0.3
 ```
 
 Run the following commands to build.
+
 **Note**: this is a quite long process and installs a lot of packages on your development machine.
 
 ```
@@ -33,7 +40,9 @@ cd cerbero \
 && ./cerbero-uninstalled -c config/linux.cbc package -f openwebrtc
 ```
 
-This will build for your own architecture. If you want to build for a different architecture, the cerbero config file ```config/linux.cbc``` can also be replaced. You can for example use ```cross-lin-x86.cbc```, ```cross-lin-arm.cbc```, etc.
+This will build for your own architecture.
+
+It seems it should be possible to build for a different architecture by changing in the commands above the cerbero config file (```config/linux.cbc```). I guess you can for example use ```cross-lin-x86.cbc```, ```cross-lin-arm.cbc```, etc., but so far I only tested same-platform compilation on X64 and X86 architectures.
 
 At the end of the process, a set of debian packages will be available in the cerbero folder.
 
@@ -49,15 +58,47 @@ sudo dpkg -i *.deb
 
 After installation is successful, openwebrtc is installed in your system.
 
-## Step 4 - Running test application
+## Step 3 - Test Server
 
-TBD
+A test server is available in the *web* folder of [EricssonResearch/openwebrtc-examples](https://github.com/EricssonResearch/openwebrtc-examples) project.
+Just clone the repository and run:
+
+```
+cd openwebrtc-examples/web
+nodejs channel_server.js 8080
+```
+
+You will need nodeJS on your system (```sudo aptitude install nodejs```).
+
+If you open any browser on port 8080 you should be able to start or join a webrtc session from any browser.
+
+## Step 4 - Launch native application
+
+Not successfull, yet.
+
+# webrtc-native
+
+These are some tests related to [vmolsa/webrtc-native](https://github.com/vmolsa/webrtc-native).
+
+Build prerequisites
+
+```
+sudo apt-get install npm
+sudo apt-get install --yes build-essential python2.7 git pkg-config libnss3-dev libasound2-dev libpulse-dev libjpeg62-dev libxv-dev libgtk2.0-dev libexpat1-dev default-jdk libxtst-dev libxss-dev libpci-dev libgconf2-dev libgnome-keyring-dev libudev-dev
+```
+
+```
+https://github.com/vmolsa/webrtc-native
+cd webrtc-native
+npm install
+```
+
 
 # Links
 
-## Useful links used for this tutorial
+## Misc unclassified links 
 
-- [OpenWebRTC](http://www.openwebrtc.org/): the library used for this test.
+- [OpenWebRTC](http://www.openwebrtc.org/)
 - [OpenWebRTC on github](https://github.com/EricssonResearch/OpenWebRTC)
 - [OpenWebRTC examples](https://github.com/EricssonResearch/openwebrtc-examples)
 - Cerbero: the "new" official [build system](https://github.com/EricssonResearch/cerbero) with [build instructions](https://github.com/EricssonResearch/openwebrtc/wiki/Building-OpenWebRTC) and [binary releases](https://github.com/EricssonResearch/openwebrtc/releases)
@@ -65,9 +106,10 @@ TBD
 - [This stackoverflow post] lists a few possible alternative native implementations of interest:
 	- [WebRTC native code](http://www.webrtc.org/native-code)
 	- [node-webrtc](https://github.com/js-platform/node-webrtc)
-
-## Misc unclassified links 
-
 - a large page of [WebRTC-related demos and resources](https://www.webrtc-experiment.com/) - code [here](https://github.com/muaz-khan/WebRTC-Experiment).	
 - https://github.com/superdump/cerbero/tree/pygi/cerbero
 - U4VL http://www.linux-projects.org/modules/news/
+- https://www.raspberrypi.org/forums/viewtopic.php?f=63&t=99283&p=693103#p693103
+- https://github.com/js-platform/node-webrtc
+- https://github.com/vmolsa/webrtc-native
+- http://sourcey.com/webrtc-native-to-browser-video-streaming-example/
