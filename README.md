@@ -1,7 +1,8 @@
 # webrtc-nativeimpl-tutorial
 
 This is a short tutorial on running WebRTC native client implementation in Linux without a browser.
-This tutorial has been executed on a Linux Development Machine (xUbuntu 14.04) and deployed ona linux box eeepc (running Ubuntu server 14.04).
+
+Packages for this tutorial have been compiled on a Linux Development Machine (xUbuntu 14.0, 64 bit architecture) and tested on a linux box mini pc (Asus EEEPC running Ubuntu server 14.04, 32-bit version).
 
 ## Step 1 - Building cerbero and openwebrtc binaries
 
@@ -22,23 +23,33 @@ sudo mkdir -p /opt/openwebrtc-0.3
 sudo chown -R $UID /opt/openwebrtc-0.3
 ```
 
-The cerbero config file ```cerbero/config/linux.cbc``` can also be modified to build for another target plaform (modifying line ```target_arch = Architecture.X86_64```).
-Valid values are e.g. *Architecture.X86_64*, *Architecture.X86*, *Architecture.ARM64*.
-
-Run the following commands to build (Note: this is a very long process and installs a lot of packages on your development machine.).
+Run the following commands to build.
+**Note**: this is a quite long process and installs a lot of packages on your development machine.
 
 ```
-cd ~/cerbero \
+cd cerbero \
 && ./cerbero-uninstalled -c config/linux.cbc fetch-package --full-reset --reset-rdeps openwebrtc \
 && ./cerbero-uninstalled -c config/linux.cbc bootstrap \
 && ./cerbero-uninstalled -c config/linux.cbc package -f openwebrtc
 ```
 
+This will build for your own architecture. If you want to build for a different architecture, the cerbero config file ```config/linux.cbc``` can also be replaced. You can for example use ```cross-lin-x86.cbc```, ```cross-lin-arm.cbc```, etc.
+
+At the end of the process, a set of debian packages will be available in the cerbero folder.
+
 ## Step 2 - Installing binaries
 
-TBD
+Binaries can be installed on any debian based system matching your architecture. Unless you have built them on your own, you can find pre-built binaries in the *binaries* folder of this tutorial.
 
-## Step 3 - Running test application
+In order to install packages just run:
+
+```
+sudo dpkg -i *.deb
+```
+
+After installation is successful, openwebrtc is installed in your system.
+
+## Step 4 - Running test application
 
 TBD
 
