@@ -113,3 +113,6 @@ npm install
 - https://github.com/js-platform/node-webrtc
 - https://github.com/vmolsa/webrtc-native
 - http://sourcey.com/webrtc-native-to-browser-video-streaming-example/
+- https://webrtchacks.com/own-phoneco-with-webrtc/
+	- https://github.com/webrtcHacks/ChadWallaceHart.com
+- http://stackoverflow.com/questions/23449666/how-to-stream-audio-from-browser-to-webrtc-native-c-application
